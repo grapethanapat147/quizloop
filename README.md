@@ -15,4 +15,29 @@ A live classroom quiz for Thai secondary teachers. Every wrong option maps to a 
 
 ## Setup
 
-Claude Code fills this in during P0.
+Requires [Bun](https://bun.sh) 1.3+, Node.js 22+ (for `next`), Git, and Docker if you want a local Supabase stack.
+
+```bash
+bun install
+cp .env.example .env.local   # fill in Supabase values from P2 on; never commit .env.local
+bun run dev                  # http://localhost:3000
+```
+
+Checks:
+
+```bash
+bun run typecheck
+bun run lint
+bun run test        # Vitest unit tests
+bun run test:e2e    # Playwright + axe; first time: bunx playwright install chromium
+```
+
+Local database (P2+):
+
+```bash
+bun run db:start    # Supabase CLI (bundled as a devDependency) + Docker
+bun run db:reset    # apply supabase/migrations/
+bun run db:types    # regenerate src/types/database.ts
+```
+
+Full command list and conventions: `CLAUDE.md` → Commands.

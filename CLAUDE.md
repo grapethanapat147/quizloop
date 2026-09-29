@@ -53,4 +53,22 @@ Next.js App Router · TypeScript (strict) · Tailwind CSS v4 · shadcn/ui · Fra
 
 ## Commands
 
-Fill this in during P0 (`dev`, `build`, `test`, `test:e2e`, `typecheck`, `lint`, `db:*`).
+Run everything with Bun from the repo root.
+
+| Command | What it does |
+|---|---|
+| `bun install` | Install dependencies (lockfile: `bun.lock`) |
+| `bun run dev` | Next.js dev server on http://localhost:3000 |
+| `bun run build` | Production build |
+| `bun run start` | Serve the production build |
+| `bun run typecheck` | `next typegen` (route/layout types) then `tsc --noEmit` |
+| `bun run lint` | ESLint (`eslint-config-next` core-web-vitals + typescript) |
+| `bun run test` | Vitest unit tests once (`src/**/*.test.{ts,tsx}`, jsdom) |
+| `bun run test:watch` | Vitest in watch mode |
+| `bun run test:e2e` | Playwright (`e2e/`), starts `dev` itself. Set `PLAYWRIGHT_CHROMIUM_PATH` to use a system Chromium instead of the Playwright download |
+| `bun run db:start` / `db:stop` / `db:status` | Local Supabase stack via the `supabase` devDependency (needs Docker) |
+| `bun run db:reset` | Recreate the local DB from `supabase/migrations/` |
+| `bun run db:migration <name>` | New empty migration file |
+| `bun run db:types` | Generate `src/types/database.ts` from the local DB |
+
+Phase exit = `typecheck`, `lint`, `test` green (plus `test:e2e` from P4). shadcn components: `bunx shadcn@latest add <name>` (config in `components.json`). `AGENTS.md` is managed by `next dev`; keep it so Next never rewrites this file.
